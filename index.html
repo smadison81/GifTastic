@@ -15,26 +15,29 @@
 </head>
 
 <body>
-
-    <div class="container">
-        <h1>Gif Search</h1>
-
-        <!-- Movies will get dumped here -->
+<header>
+    <nav class="navbar navbar-expand navbar-light bg-faded">
         <div id="buttons-view"></div>
+        <form class="form-inline my-2 my-lg-0">
 
-        <form id="movie-form">
-            <label for="movie-input">Add a Gif!</label>
-            <input type="text" id="movie-input"><br>
+            <input class="form-control mr-sm-2" id= "gif-input" type="text" placeholder="Gif Search">
+            <button id="add-gif" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </nav>
+</header>
 
-            <!-- Button triggers new movie to be added -->
-            <input id="add-movie" type="submit" value="Add a Movie, Yo!">
-        </form>
-        <div id="movies-view">
 
-            <div class="movie-info"></div>
+<row>
+    <div class="container-fluid">
+    
+        <div id="gif-view">
+
+            <div class="gif-info">
+
+            </div>
 
         </div>
     </div>
+</row>
 
 
     <!-- Optional JavaScript -->
@@ -48,7 +51,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
-    <script src="./assets/javascript/giffy.js"></script>
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
     <script src="./assets/javascript/app.js"></script>
 </body>
 

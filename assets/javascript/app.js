@@ -1,12 +1,13 @@
+
 // Example queryURL for Giphy API
-var gifs = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+var gifs = ["Black Dynamite", "Tekken", "Mr. Baseball", "Hateful Eight"];
 
 
 function displayGif() {
 
     var q = $(this).attr("data-name");
     var api_key = "&api_key=nBAkbogRHgIsRY86uWJH4q0ViWa7dkF2";
-    var queryURL = "http://api.giphy.com/v1/gifs/search?" + "q=" + q + api_key;
+    var queryURL = "http://api.giphy.com/v1/gifs/search?" + "q=" + q + api_key + "&limit=10";
 
     console.log(queryURL);
 
@@ -20,42 +21,56 @@ function displayGif() {
         console.log(results);
         for (var i = 0; i < results.length; i++) {
 
-            var spaceOut = $("<div class='col-md-4'>");
+            var spaceOut = $("<div>");
 
-
-            var defaultAnimatedSrc = results[i].images.fixed_height.url;
-            var staticSrc = results[i].images.fixed_height_still.url;
+            var animated = results[i].images.fixed_height.url;
+            var still = results[i].images.fixed_height_still.url;
+            var ratings = results[i].rating;
             var gifDisplay = $("<img>");
+            var rate = $("<p>").text("Rating: " + ratings);
 
-            gifDisplay.attr("src", staticSrc);
-            gifDisplay.addClass("netflixGiphy");
+            gifDisplay.attr("src", still);
+            gifDisplay.addClass("giphy");
+            gifDisplay.addClass("static");
+            gifDisplay.addClass(".gifContainer");
             gifDisplay.attr("data-state", "still");
-            gifDisplay.attr("data-still", staticSrc);
-            gifDisplay.attr("data-animate", defaultAnimatedSrc);
+            gifDisplay.attr("data-still", still);
+            gifDisplay.attr("data-animate", animated);
+            gifDisplay.attr("alt", q);
+            rate.addClass("rateFloat");
+            // spaceOut.append(rate);
             spaceOut.append(gifDisplay);
-            $("#movies-view").prepend(spaceOut);
+            $("#gif-view").prepend(spaceOut);
+
+
+
+            $('.giphy')
+            .mouseover(function () {
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animated");
+            })
+            .mouseout(function () {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+            });
+
         }
+
+
     });
+
 
 }
 
-// Function for displaying movie data
 function renderButtons() {
 
-    // YOUR CODE GOES HERE
 
     $('#buttons-view').empty();
-
-    // for (var i = 0; i < gifs.length; i++) {
-
-    //     
-
-    //     $('#buttons-view').append(newButton);
 
     for (var i = 0; i < gifs.length; i++) {
 
         var newButton = $('<button>').text(gifs[i]);
-        // Adds a class of movie to our button
+        // Adds a class of gif to our button
         newButton.addClass("gif");
         // Added a data-attribute
         newButton.attr("data-name", gifs[i]);
@@ -67,20 +82,20 @@ function renderButtons() {
 
 
 
+
+
     }
 }
 
 
 
 // This function handles events where one button is clicked
-$("#add-movie").on("click", function (event) {
-
-    // YOUR CODE GOES HERE
+$("#add-gif").on("click", function (event) {
 
 
     event.preventDefault();
 
-    var newGif = $("#movie-input").val().trim();
+    var newGif = $("#gif-input").val().trim();
 
     gifs.push(newGif);
 
@@ -91,6 +106,8 @@ $(document).on("click", ".gif", displayGif);
 
 // Calling the renderButtons function to display the initial list of gifs
 renderButtons();
+
+
 
 
 
